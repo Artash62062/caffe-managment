@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>ViDemo Login</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <style>
+    form[id=signup] {
+      height: 400px;
+      width: 500px;
+      margin: auto;
+      margin-top: 200px;
+    }
+
+  </style>
+</head>
+<body class="text-center">
+<form id="signup" class="signin" action="/register" method="post">
+  <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+
+  <label for="login" class="sr-only">Email address</label>
+  <input name = "login"  id="login" class="form-control" placeholder="Login" required="required" autofocus="autofocus">
+  <br/>
+  <label for="password" class="sr-only">Password</label>
+  <input  name ="password" type="password" id="password" class="form-control" placeholder="Password" required="">
+  <br/>
+  <label for="name" class="sr-only">User Name</label>
+  <input name="name" type="text" id="name" class="form-control" placeholder="User Name" required="">
+  <br/>
+  <label for ="role" class="sr-only">Choose a Role</label>
+  <select name = "role" id ="role" class="form-select">
+    <option value="ROLE_MANAGER" >Manager</option>
+    <option value="ROLE_WAITER">Waiter</option>
+  </select>
+  <br/>
+  <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
+
+  <br/>
+  <span th:if="${UserExistCode ==1}">
+        <p style="color: red; margin: auto;font-size: large">User with Email already Exist (<a href="/login">Sign in</a>) </p>
+    <br/>
+    </span>
+
+  <span th:if="${UserExistCode==2}">
+        <p style="color: red; margin: auto;font-size: large">User with Username already Exist (<a href="/login">Sign in</a>) </p>
+    <br/>
+    </span>
+
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+  <p class="mt-5 mb-3 text-muted">© 2017-2020</p>
+</form>
+
+
+</body>
+</html>
